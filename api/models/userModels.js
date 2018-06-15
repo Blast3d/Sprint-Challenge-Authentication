@@ -17,11 +17,11 @@ const UserSchema = Schema({
   password: {
     type: String,
     required: true,
-    minlength: 4,
-    maxlength: 25,
+    // minlength: 4,
+    // maxlength: 25,
     // validate: checkPasswordLength,
     // msg: 'password is too weak',
-  },
+  }
 
 });
 
@@ -43,7 +43,8 @@ UserSchema.pre('save', function (next) {
 });
 
 UserSchema.methods.checkPassword = function (plainTextPW, callBack) {
-  return bcrypt.compare(plainTextPW, this.password);
+  return bcrypt.compare(plainTextPW, this.password, callBack);
+
   // https://github.com/kelektiv/node.bcrypt.js#usage
   // Fill this method in with the Proper password comparing, bcrypt.compare()
   // Your controller will be responsible for sending the information here for password comparison
